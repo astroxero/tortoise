@@ -1,3 +1,4 @@
+import './App.css';
 import { Link, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -12,8 +13,14 @@ function App() {
   return (
     <>
       <nav>
-        <ul><li><Link to="/login">Login</Link></li></ul>
-        <ul><li><Link to="/">Home</Link></li></ul>
+        <div class="logo">
+          <img src="./src/assets/tortoise.png" alt="Logo" />
+        </div>
+        <ul>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/">Home</Link></li>
+        </ul>
+        
       </nav>
       <Routes>
         <Route path="/login" element={<Login/>} />
