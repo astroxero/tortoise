@@ -21,12 +21,17 @@ function LoggedinPage() {
       });
     }
 
+    function signOut() {
+        supabase.auth.signOut();
+    }
+
     if (!userEmail) {
         return <h1>Please sign in</h1>;
     } else {
         return (
             <>
                 <h1>Welcome {userEmail}</h1>
+                <button onClick={signOut}>Sign Out</button>
             </>
         )
     }
