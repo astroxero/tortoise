@@ -19,7 +19,7 @@ function Login() {
     });
       
     if (error) {
-      alert('Incorrect email or password');
+      alert(error);
     } else {
       const session = supabase.auth.getSession();
 
