@@ -23,6 +23,7 @@ function LoggedinPage() {
 
     function signOut() {
         supabase.auth.signOut();
+        window.location.href = "/login";
     }
 
     if (!userEmail) {
