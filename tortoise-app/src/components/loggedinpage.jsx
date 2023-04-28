@@ -27,12 +27,15 @@ function LoggedinPage() {
     }
 
     if (!userEmail) {
-        return <h1>Please sign in</h1>;
+        return <h1 className="container">Please sign in</h1>;
     } else {
         return (
             <>
-                <h1>Welcome {userEmail}</h1>
-                <button onClick={signOut}>Sign Out</button>
+                <div className="container">
+                    <h1>Welcome {userEmail}</h1>
+                    <button onClick={signOut}>Sign Out</button>
+                </div>
+                
             </>
         )
     }

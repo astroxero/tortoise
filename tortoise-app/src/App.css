@@ -1,3 +1,8 @@
+.container {
+  margin: 10%;
+  width: 100%;
+}
+
 nav {
     background-color: #333;
     height: 80px;

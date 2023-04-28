@@ -45,17 +45,13 @@ function Login() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1>Sign In</h1>
         <form>
-          <label>
-            Email:
-            <input type="email" value={em} onChange={(e) => setEM(e.target.value)} />
-          </label>
-          <label>
-            Password:
-            <input type="password" value={pw} onChange={(e) => setPW(e.target.value)} />
-          </label>
+          <input placeholder="Email" type="email" value={em} onChange={(e) => setEM(e.target.value)} />
+          <br></br>
+          <input placeholder="Password" type="password" value={pw} onChange={(e) => setPW(e.target.value)} />
+          <br></br>
           <button onClick={signUp}>Sign Up</button>
           <button type="button" onClick={signIn}>Sign In</button>
         </form>
