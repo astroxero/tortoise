@@ -46,11 +46,12 @@ function Login() {
 
   return (
     <>
-      <div className="centeredcontainer">
+      <div className="container">
         <h1>Sign In</h1>
         <form>
             <input placeholder="Email" type="email" value={em} onChange={(e) => setEM(e.target.value)} />
             <input placeholder="Password" type="password" value={pw} onChange={(e) => setPW(e.target.value)} />
+          <br></br>
           <button onClick={signUp}>Sign Up</button>
           <button type="button" onClick={signIn}>Sign In</button>
         </form>
