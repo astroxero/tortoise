@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <nav>
-        <div class="logo">
+        <div className="logo">
           <img src="./src/assets/tortoise.png" alt="Logo" />
         </div>
         <ul>
