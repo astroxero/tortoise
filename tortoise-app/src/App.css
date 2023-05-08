@@ -25,6 +25,10 @@ nav {
     border-radius: 10%;
     margin: 0.1%;
   }
+
+  .logo:hover {
+    cursor: grab;
+  }
   
   .logo img {
     width: 100%;

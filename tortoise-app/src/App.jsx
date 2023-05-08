@@ -14,7 +14,7 @@ function App() {
     <>
       <nav>
         <div className="logo">
-          <img src="./src/assets/tortoise.png" alt="Logo" />
+          <img src="./src/assets/tortoise.png" alt="Logo" onClick={() => window.location = "/"}/>
         </div>
         <ul>
           <li><Link to="/login">Login</Link></li>
