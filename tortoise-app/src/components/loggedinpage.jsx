@@ -6,6 +6,7 @@ const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhb
 function LoggedinPage() {
     const session = supabase.auth.getSession();
     const [userEmail, setUserEmail] = useState('')
+    const [tasks, setTasks] = useState([])
 
     if (session && session.user) {
         setUserEmail(session.user.email);
