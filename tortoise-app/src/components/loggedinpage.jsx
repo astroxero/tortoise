@@ -46,11 +46,14 @@ function LoggedinPage() {
                     
                     <ul>
                         {tasks.map((task) => (
-                            <span key={task.name}>
+                            <div key={task.name}>
                                 <li>{task.name}</li>
-                            </span>
+                                <br />
+                            </div>
                         ))}
                     </ul>
+
+
                     <button onClick={signOut}>Sign Out</button>
                 </div>
                
