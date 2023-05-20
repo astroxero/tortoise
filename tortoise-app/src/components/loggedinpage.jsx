@@ -6,6 +6,7 @@ const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhb
 function LoggedinPage() {
     const session = supabase.auth.getSession();
     const [userEmail, setUserEmail] = useState('')
+    const [task,  setTasks] = useState([])
 
     if (session && session.user) {
         setUserEmail(session.user.email);
@@ -32,7 +33,7 @@ function LoggedinPage() {
         return (
             <>
                 <div className="container">
-                    <h1>Welcome {userEmail}!</h1>
+                    <h1>Hey {userEmail}, here are your tasks!</h1>
                     <button onClick={signOut}>Sign Out</button>
                 </div>
                 
