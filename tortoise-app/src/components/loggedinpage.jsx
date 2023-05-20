@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZueXZ2aHhmeWVyZGprem1yYXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE1NzMxMTMsImV4cCI6MTk5NzE0OTExM30.Qq3JOHl2WBdmcT1jzLjrVroc2pDrcLjcMfJB3tv6wY8");
 
@@ -6,7 +6,16 @@ const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhb
 function LoggedinPage() {
     const session = supabase.auth.getSession();
     const [userEmail, setUserEmail] = useState('')
-    const [task,  setTasks] = useState([])
+    const [tasks,  setTasks] = useState([])
+
+    useEffect(() => {
+      getTasks();
+    }, []);
+
+    async function getTasks() {
+      const { data } = await supabase.from("tasks").select();
+      setTasks(data);
+    }
 
     if (session && session.user) {
         setUserEmail(session.user.email);
@@ -34,9 +43,17 @@ function LoggedinPage() {
             <>
                 <div className="container">
                     <h1>Hey {userEmail}, here are your tasks!</h1>
+                    
+                    <ul>
+                        {tasks.map((task) => (
+                            <span key={task.name}>
+                                <li>{task.name}</li>
+                            </span>
+                        ))}
+                    </ul>
                     <button onClick={signOut}>Sign Out</button>
                 </div>
-                
+               
             </>
         )
     }
