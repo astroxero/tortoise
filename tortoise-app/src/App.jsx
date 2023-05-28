@@ -1,6 +1,5 @@
 import './App.css';
 import { Link, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Login from "./components/login";
 import MainPage from "./components/mainpage";
