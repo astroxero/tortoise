@@ -3,7 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Login from "./components/login";
-import LoggedinPage from "./components/loggedinpage";
+import MainPage from "./components/mainpage";
 
 const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZueXZ2aHhmeWVyZGprem1yYXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE1NzMxMTMsImV4cCI6MTk5NzE0OTExM30.Qq3JOHl2WBdmcT1jzLjrVroc2pDrcLjcMfJB3tv6wY8");
 
@@ -24,7 +24,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/login" element={<Login/>} />
-        <Route path="/" element={<LoggedinPage/>} />
+        <Route path="/" element={<MainPage/>} />
       </Routes>
     </>
   );
