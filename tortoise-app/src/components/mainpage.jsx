@@ -80,6 +80,7 @@ function MainPage() {
                             <div key={task.name}>
                                 <li>{task.name}</li>
                                 <button className="deleteButton" onClick={() => deleteTask(task.name)}>Delete</button>
+                                <br />
                             </div>
                         ))}
                     <br />

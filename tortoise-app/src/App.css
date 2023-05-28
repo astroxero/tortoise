@@ -21,10 +21,16 @@ button {
   transition: border-color 0.25s;
   margin: 1%;
 }
+button:hover {
+  background-color: #bbbbbb;
+}
 
 .deleteButton {
-  background-color: rgb(255, 121, 121);
+  background-color: rgb(255, 107, 107);
   color: white;
+}
+.deleteButton:hover {
+  background-color: rgb(255, 67, 67);
 }
 
 nav {
