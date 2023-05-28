@@ -7,6 +7,7 @@ function MainPage() {
     const session = supabase.auth.getSession();
     const [userEmail, setUserEmail] = useState('')
     const [tasks,  setTasks] = useState([])
+    const [taskName, setTaskName] = useState('')
 
     useEffect(() => {
       getTasks();
@@ -46,6 +47,24 @@ function MainPage() {
         supabase.auth.signOut();
         window.location.href = "/login";
     }
+
+    async function addTask(e) {
+        e.preventDefault();
+        await supabase.from("tasks").insert([
+          {
+            name: taskName,
+            user_email: userEmail
+          },
+        ]);
+        setTaskName('');
+        getTasks();
+    }      
+
+    async function deleteTask(taskName) {
+        await supabase.from("tasks").delete().match({ name: taskName });
+        getTasks();
+    }      
+
     //if user is not logged in, tell them to sign in
     if (!userEmail) {
         return <h1 className="container">Please sign in</h1>;
@@ -56,17 +75,24 @@ function MainPage() {
                 <div className="container">
                     <h1>Hey {userEmail}, here are your tasks!</h1>
                     
-                    <ul>
+                    
                         {tasks.map((task) => (
                             <div key={task.name}>
                                 <li>{task.name}</li>
-                                <br />
+                                <button className="deleteButton" onClick={() => deleteTask(task.name)}>Delete</button>
                             </div>
                         ))}
-                    </ul>
+                    <br />
+                    
 
 
                     <button onClick={signOut}>Sign Out</button>
+                    <br />
+                    <br />
+                    <form>
+                        <input placeholder="Task Name" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
+                        <button onClick={addTask}>Add Task</button>
+                    </form>
                 </div>
                
             </>
