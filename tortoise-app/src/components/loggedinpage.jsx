@@ -12,9 +12,13 @@ function LoggedinPage() {
       getTasks();
     }, []);
 
+    //make gettasks happen when useremail changes
+    useEffect(() => {
+        getTasks();
+    }, [userEmail]);
+    
     async function getTasks() {
         const { data } = await supabase.from("tasks").select();
-        //only show tasks that belong to the user
         const filteredData = data.filter((task) => task.user_email === userEmail);
         setTasks(filteredData);
     }
