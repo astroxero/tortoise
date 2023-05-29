@@ -9,8 +9,12 @@ function Account() {
 
   //set user email
   useEffect(() => {
-    makeEmail();
-  }, [session]);
+    const authListener = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session && session.user) {
+        setUserEmail(session.user.email);
+      }
+    });
+  }, []);
 
   function makeEmail() {
     if (session && session.user) {

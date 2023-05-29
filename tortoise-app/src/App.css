@@ -31,12 +31,11 @@ button:hover {
   background-color: #9a9a9a;
 }
 
-.deleteButton {
-  background-color: rgb(252, 122, 122);
-  color: white;
+.completeButton {
+  background-color: rgb(188, 255, 200);
 }
-.deleteButton:hover {
-  background-color: rgb(255, 54, 54);
+.completeButton:hover {
+  background-color: rgb(67, 255, 104);
 }
 
 nav {
