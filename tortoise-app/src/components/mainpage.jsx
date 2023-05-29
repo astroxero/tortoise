@@ -41,13 +41,6 @@ function MainPage() {
       });
     }
 
-    
-    //sign out
-    function signOut() {
-        supabase.auth.signOut();
-        window.location.href = "/login";
-    }
-
     async function addTask(e) {
         e.preventDefault();
         await supabase.from("tasks").insert([
@@ -73,21 +66,18 @@ function MainPage() {
         return (
             <>
                 <div className="container">
+                    
                     <h1>Hey {userEmail}, here are your tasks!</h1>
                     
                     
-                        {tasks.map((task) => (
-                            <div key={task.name}>
-                                <li>{task.name}</li>
-                                <button className="deleteButton" onClick={() => deleteTask(task.name)}>Delete</button>
-                                <br />
-                            </div>
-                        ))}
-                    <br />
-                    
 
-
-                    <button onClick={signOut}>Sign Out</button>
+                    {tasks.map((task) => (
+                        <div key={task.name}>
+                            <li>{task.name}</li>
+                            <button className="deleteButton" onClick={() => deleteTask(task.name)}>Delete</button>
+                            <br />
+                        </div>
+                    ))}
                     <br />
                     <br />
                     <form>

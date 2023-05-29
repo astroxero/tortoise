@@ -9,6 +9,12 @@ li {
   font-weight: bold;
 }
 
+.navbut {
+  margin: 0 5px;
+  font-size: large;
+  font-weight: bold;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -22,15 +28,15 @@ button {
   margin: 1%;
 }
 button:hover {
-  background-color: #bbbbbb;
+  background-color: #9a9a9a;
 }
 
 .deleteButton {
-  background-color: rgb(255, 107, 107);
+  background-color: rgb(252, 122, 122);
   color: white;
 }
 .deleteButton:hover {
-  background-color: rgb(255, 67, 67);
+  background-color: rgb(255, 54, 54);
 }
 
 nav {
