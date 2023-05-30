@@ -32,10 +32,10 @@ button:hover {
 }
 
 .completeButton {
-  background-color: rgb(188, 255, 200);
+  background-color: rgb(101, 255, 129);
 }
 .completeButton:hover {
-  background-color: rgb(67, 255, 104);
+  background-color: rgb(0, 179, 36);
 }
 
 nav {
