@@ -9,7 +9,6 @@ function MainPage() {
     const [userEmail, setUserEmail] = useState('')
     const [tasks,  setTasks] = useState([])
     const [taskName, setTaskName] = useState('')
-    const [dDate, setDDate] = useState('')
 
     useEffect(() => {
       getTasks();
