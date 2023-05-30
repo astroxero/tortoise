@@ -14,6 +14,7 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [loginText,  setLoginText] = useState('Login');
   const [loginRoute, setLoginRoute] = useState('/login');
+  const [homeText, setHomeText] = useState('Home')
 
   useEffect(() => {
     if (session && session.user && session.user.email) {
@@ -21,31 +22,41 @@ function App() {
       setLoggedIn(true);
       setLoginText(userEmail);
       setLoginRoute('/account');
+      setHomeText('');
     } else {
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN' && session && session.user && session.user.email) {
           setUserEmail(session.user.email);
           setLoginText(session.user.email); // Update login text to user's email
-          setLoginRoute('/account');
+          setLoginRoute('/');
+          setHomeText('');
         }
         if (event === 'SIGNED_OUT') {
           setUserEmail('');
           setLoginText('Login'); // Reset login text to 'Login' when signed out
           setLoginRoute('/login');
+          setHomeText('Home');
         }
       });
     }
   }, [session, userEmail]);
 
+  function signOut() {
+    supabase.auth.signOut();
+    //clear cache
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
   return (
     <>
       <nav>
         <div className="logo">
-          <img src="./src/assets/tortoise.png" alt="Logo" onClick={() => window.location = "/"} />
+          <img src="./src/assets/tortoise.png" alt="Logo" onClick={() => window.location.reload} />
         </div>
         <ul>
-          <li><Link id='loginlink' to={loginRoute}>{loginText}</Link></li>
-          <li><Link to="/">Home</Link></li>
+          {userEmail && <button className='navbut' onClick={signOut}>Sign Out</button>}
+          
         </ul>
       </nav>
       <Routes>
