@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { Component } from "react";
 const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZueXZ2aHhmeWVyZGprem1yYXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE1NzMxMTMsImV4cCI6MTk5NzE0OTExM30.Qq3JOHl2WBdmcT1jzLjrVroc2pDrcLjcMfJB3tv6wY8");
 
 
@@ -8,9 +9,12 @@ function MainPage() {
     const [userEmail, setUserEmail] = useState('')
     const [tasks,  setTasks] = useState([])
     const [taskName, setTaskName] = useState('')
+    const [dDate, setDDate] = useState('')
 
     useEffect(() => {
       getTasks();
+      checkUser();
+      console.log(userEmail);
     }, []);
 
     //make gettasks happen when useremail changes
@@ -26,41 +30,52 @@ function MainPage() {
     }
 
 
-    //check if user is logged in
-    if (session && session.user) {
-        setUserEmail(session.user.email);
-        setLoggedIn(true);
-    } else {
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' && session && session.user) {
+    function checkUser() {
+        if (session && session.user) {
             setUserEmail(session.user.email);
+            setLoggedIn(true);
+        } else {
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN' && session && session.user) {
+                    setUserEmail(session.user.email);
+                }
+                if (event === 'SIGNED_OUT') {
+                    setUserEmail('');
+                }
+            });
         }
-        if (event === 'SIGNED_OUT') {
-            setUserEmail('');
-        }
-      });
     }
 
     async function addTask(e) {
-        e.preventDefault();
-        await supabase.from("tasks").insert([
-          {
-            name: taskName,
-            user_email: userEmail
-          },
-        ]);
-        setTaskName('');
-        getTasks();
+        if (!taskName) {
+            alert("Please enter a task name");
+        } else {
+            e.preventDefault();
+            await supabase.from("tasks").insert([
+            {
+                name: taskName,
+                user_email: userEmail,
+            },
+            ]);
+            setTaskName('');
+            getTasks();
+        }
+        
     }      
 
     async function deleteTask(taskName) {
         await supabase.from("tasks").delete().match({ name: taskName });
         getTasks();
-    }      
+    }
 
     //if user is not logged in, tell them to sign in
     if (!userEmail) {
-        return <h1 className="container">Please sign in</h1>;
+        return (
+            <div className="container">
+                <h1>What if your tasks could learn about you?</h1>
+                <button onClick={() => window.location.href = '/login'}>Sign In</button>
+            </div>
+        );
     } else {
         //if user is logged in, show them their tasks
         return (
