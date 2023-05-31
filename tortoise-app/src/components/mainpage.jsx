@@ -6,9 +6,9 @@ const supabase = createClient("https://vnyvvhxfyerdjkzmrayi.supabase.co", "eyJhb
 
 function MainPage() {
     const session = supabase.auth.getSession();
-    const [userEmail, setUserEmail] = useState('')
-    const [tasks,  setTasks] = useState([])
-    const [taskName, setTaskName] = useState('')
+    const [userEmail, setUserEmail] = useState('');
+    const [tasks,  setTasks] = useState([]);
+    const [taskName, setTaskName] = useState('');
 
     useEffect(() => {
       getTasks();
@@ -94,9 +94,9 @@ function MainPage() {
                     ))}
                     <br />
                     <br />
-                    <form>
+                    <form onSubmit={addTask}>
                         <input placeholder="Task Name" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
-                        <button onClick={addTask}>Add Task</button>
+                        <button type="submit">Add Task</button>
                     </form>
                 </div>
                
