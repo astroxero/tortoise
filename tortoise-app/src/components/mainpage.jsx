@@ -9,6 +9,7 @@ function MainPage() {
     const [userEmail, setUserEmail] = useState('');
     const [tasks,  setTasks] = useState([]);
     const [taskName, setTaskName] = useState('');
+    
 
     useEffect(() => {
       getTasks();
@@ -72,8 +73,9 @@ function MainPage() {
             model: "text-davinci-003",
             prompt: "make a subtask of this task: " + taskName + "\n-",
             temperature: 0,
-            max_tokens: 7,
+            max_tokens: 14,
         });
+        console.log(response);
         //add the new task to the database
         await supabase.from("tasks").insert([
             {
@@ -81,6 +83,7 @@ function MainPage() {
                 user_email: userEmail,
             },
         ]);
+        getTasks();
     }
 
     async function deleteTask(taskName) {
