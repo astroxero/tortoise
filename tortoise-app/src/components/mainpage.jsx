@@ -62,6 +62,17 @@ function MainPage() {
         
     }      
 
+    async function expandTask(taskName) {
+        const newTask = await fetch('localhost1212/' + taskName)
+            await supabase.from("tasks").insert([
+            {
+                name: newTask,
+                user_email: userEmail,
+            },
+            ]);
+            getTasks();
+    }
+
     async function deleteTask(taskName) {
         await supabase.from("tasks").delete().match({ name: taskName });
         getTasks();
@@ -89,6 +100,7 @@ function MainPage() {
                         <div key={task.name}>
                             <li>{task.name}</li>
                             <button className="completeButton" onClick={() => deleteTask(task.name)}>Complete</button>
+                            <button className="expandButton" onClick={() => expandTask(task.name)}>Expand</button>
                             <br />
                         </div>
                     ))}
