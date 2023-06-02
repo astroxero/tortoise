@@ -2,6 +2,9 @@ const http = require('http');
 const port = 1212;
 
 const requestHandler = async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     if (request.url.substring(1) == '') {
         response.end('Please enter a task name in the url');
         return;

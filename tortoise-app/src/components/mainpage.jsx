@@ -63,15 +63,30 @@ function MainPage() {
     }      
 
     async function expandTask(taskName) {
-        const newTask = await fetch('localhost1212/' + taskName)
+        try {
+          const response = await fetch(`http://localhost:1212/${taskName}`);
+          if (response.ok) {
+            //convert response to json
+            const newName = await response.text();
+
+            // Assuming 'userEmail' is defined somewhere in the code
             await supabase.from("tasks").insert([
-            {
-                name: newTask,
+              {
+                name: newName,
                 user_email: userEmail,
-            },
+              },
             ]);
+            
+            // Assuming 'getTasks' is defined somewhere in the code
             getTasks();
-    }
+          } else {
+            throw new Error('Failed to fetch task');
+          }
+        } catch (error) {
+          console.error('Error occurred:', error);
+        }
+      }
+      
 
     async function deleteTask(taskName) {
         await supabase.from("tasks").delete().match({ name: taskName });
