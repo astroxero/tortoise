@@ -97,7 +97,7 @@ function MainPage() {
     if (!userEmail) {
         return (
             <div className="container">
-                <h1>What if your tasks could learn about you?</h1>
+                <h1>What if your tasks could manage themselves?</h1>
                 <button onClick={() => window.location.href = '/login'}>Sign In</button>
             </div>
         );
