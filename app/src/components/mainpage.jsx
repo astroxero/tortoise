@@ -9,6 +9,7 @@ function MainPage() {
     const [userEmail, setUserEmail] = useState('');
     const [tasks,  setTasks] = useState([]);
     const [taskName, setTaskName] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       getTasks();
@@ -60,21 +61,31 @@ function MainPage() {
             getTasks();
         }
         
-    }      
+    }
+
 
     async function expandTask(taskName) {
         try {
           const response = await fetch(`http://localhost:1212/${taskName}`);
           if (response.ok) {
-            //convert response to json
-            const newName = await response.text();
+            //each bullet point in the response and remove bullet points
+            const data = await response.text();
+            const splitData = data.split("\n");
 
-            // Assuming 'userEmail' is defined somewhere in the code
+            // make each bullet point a new task
             await supabase.from("tasks").insert([
               {
-                name: newName,
+                name: splitData[2],
                 user_email: userEmail,
               },
+              {
+                name: splitData[3],
+                user_email: userEmail,
+              },
+              {
+                name: splitData[4],
+                user_email: userEmail,
+              }
             ]);
             
             // Assuming 'getTasks' is defined somewhere in the code

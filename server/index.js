@@ -36,11 +36,11 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 async function runPrompt(taskName) {
-    const prompt = `make ONLY ONE subtask (not a list) for ` + taskName;
+    const prompt = `make 3 subtasks in a list (list must have no markers such as numbers or bullets but each subtask should be on its own line) for ` + taskName;
     const response = await openai.createCompletion({
         model: 'text-davinci-003',
         prompt: prompt,
-        max_tokens: 40,
+        max_tokens: 100,
         temperature: 1.0,
     });
 
