@@ -117,10 +117,13 @@ function MainPage() {
         return (
             <>
                 <div className="container">
-                    
+                    <br></br>
                     <h1>Hey {userEmail}, here are your tasks!</h1>
                     
-                    
+                    <form onSubmit={addTask}>
+                        <input placeholder="Task Name" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
+                        <button type="submit">Add Task</button>
+                    </form>
 
                     {tasks.map((task) => (
                         <div key={task.name}>
@@ -132,10 +135,7 @@ function MainPage() {
                     ))}
                     <br />
                     <br />
-                    <form onSubmit={addTask}>
-                        <input placeholder="Task Name" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
-                        <button type="submit">Add Task</button>
-                    </form>
+                    
                 </div>
                
             </>
