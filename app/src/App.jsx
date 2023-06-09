@@ -1,4 +1,3 @@
-import './App.css';
 import { Link, Route, Routes } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import Login from "./components/login";
