@@ -93,8 +93,8 @@ button:hover {
   background-color: rgb(20, 138, 44);
   animation: changeGreen 0.5s;
 }
-.expandButton:active {
-  animation: expandAnim 3s;
+.ebClicked {
+  animation: expandAnim 3s infinite;
 }
 
 @keyframes changeGreen {

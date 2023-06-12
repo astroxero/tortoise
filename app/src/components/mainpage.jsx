@@ -10,6 +10,7 @@ function MainPage() {
     const [tasks,  setTasks] = useState([]);
     const [taskName, setTaskName] = useState('');
     const [loading, setLoading] = useState(false);
+    const [expandBttn, setExpandBttn] = useState();
 
     useEffect(() => {
       getTasks();
@@ -65,6 +66,8 @@ function MainPage() {
 
 
     async function expandTask(taskName) {
+        const expandButton = event.target;
+        expandButton.classList.add("ebClicked");
         try {
           const response = await fetch(`http://localhost:1212/${taskName}`);
           if (response.ok) {
@@ -96,7 +99,8 @@ function MainPage() {
         } catch (error) {
           console.error('Error occurred:', error);
         }
-      }
+        expandButton.classList.remove("ebClicked");
+    }
       
 
     async function deleteTask(taskName) {
@@ -129,7 +133,7 @@ function MainPage() {
                         <div key={task.name}>
                             <li>{task.name}</li>
                             <button className="completeButton" onClick={() => deleteTask(task.name)}>Complete</button>
-                            <button className="expandButton" onClick={() => expandTask(task.name)}>Expand</button>
+                            <button name="expandBttn" className="expandButton" onClick={() => expandTask(task.name)}>Expand</button>
                             <br />
                         </div>
                     ))}
