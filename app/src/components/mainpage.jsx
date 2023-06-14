@@ -10,7 +10,6 @@ function MainPage() {
     const [tasks,  setTasks] = useState([]);
     const [taskName, setTaskName] = useState('');
     const [loading, setLoading] = useState(false);
-    const [expandBttn, setExpandBttn] = useState();
 
     useEffect(() => {
       getTasks();
@@ -68,12 +67,11 @@ function MainPage() {
     async function expandTask(taskName) {
         const expandButton = event.target;
         expandButton.classList.add("ebClicked");
+        expandButton.disabled = true;
+        await new Promise(r => setTimeout(r, 1000));
         try {
           const response = await fetch(`http://localhost:1212/${taskName}`);
           if (response.ok) {
-            //wait 1 seconds
-            await new Promise(r => setTimeout(r, 1000));
-
             //each bullet point in the response and remove bullet points
             const data = await response.text();
             const splitData = data.split("\n");
@@ -103,6 +101,7 @@ function MainPage() {
           console.error('Error occurred:', error);
         }
         expandButton.classList.remove("ebClicked");
+        expandButton.disabled = false;
     }
       
 
