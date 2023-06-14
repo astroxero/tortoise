@@ -71,6 +71,9 @@ function MainPage() {
         try {
           const response = await fetch(`http://localhost:1212/${taskName}`);
           if (response.ok) {
+            //wait 1 seconds
+            await new Promise(r => setTimeout(r, 1000));
+
             //each bullet point in the response and remove bullet points
             const data = await response.text();
             const splitData = data.split("\n");
