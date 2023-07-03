@@ -138,8 +138,8 @@ function MainPage() {
                     {tasks.map((task) => (
                         <div key={task.name}>
                             <li>{task.name}</li>
-                            <button className="completeButton" onClick={() => deleteTask(task.name, task.id)}>Complete</button>
                             <button name="expandBttn" className="expandButton" onClick={() => expandTask(task.name)}>Expand</button>
+                            <button className="completeButton" onClick={() => deleteTask(task.name, task.id)}>Complete</button>
                             <br />
                         </div>
                     ))}
