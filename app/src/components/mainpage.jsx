@@ -66,6 +66,7 @@ function MainPage() {
 
     async function expandTask(taskName) {
         const expandButton = event.target;
+        expandButton.classList.remove("expandButton")
         expandButton.classList.add("ebClicked");
         await new Promise(r => setTimeout(r, 100));
         expandButton.disabled = true;
@@ -103,6 +104,7 @@ function MainPage() {
           console.error('Error occurred:', error);
         }
         expandButton.classList.remove("ebClicked");
+        expandButton.classList.add("expandButton")
         expandButton.disabled = false;
     }
       

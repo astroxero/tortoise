@@ -96,6 +96,9 @@ button:hover {
 .ebClicked {
   animation: expandAnim 3s infinite;
 }
+.ebClicked:hover {
+  animation: expandAnim 3s infinite;
+}
 
 @keyframes changeGreen {
   0% {
