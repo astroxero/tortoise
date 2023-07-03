@@ -98,6 +98,7 @@ function MainPage() {
           } else {
             throw new Error('Failed to fetch task');
           }
+
         } catch (error) {
           console.error('Error occurred:', error);
         }
@@ -106,8 +107,8 @@ function MainPage() {
     }
       
 
-    async function deleteTask(taskName) {
-        await supabase.from("tasks").delete().match({ name: taskName });
+    async function deleteTask(taskName, taskID) {
+        await supabase.from("tasks").delete().match({ name: taskName, id: taskID });
         getTasks();
     }
 
@@ -135,7 +136,7 @@ function MainPage() {
                     {tasks.map((task) => (
                         <div key={task.name}>
                             <li>{task.name}</li>
-                            <button className="completeButton" onClick={() => deleteTask(task.name)}>Complete</button>
+                            <button className="completeButton" onClick={() => deleteTask(task.name, task.id)}>Complete</button>
                             <button name="expandBttn" className="expandButton" onClick={() => expandTask(task.name)}>Expand</button>
                             <br />
                         </div>
